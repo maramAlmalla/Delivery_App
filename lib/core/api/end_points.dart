@@ -4,6 +4,10 @@ class EndPoint {
   static String signIn = "login";
   static String signUp = "register";
   static String logout = "logout";
+  static String categories = "categories";
+  static String forgotPassword = "forgot-password";
+  static String resetPassword = "reset-password";
+
   static String getUserDataEndPoint(id) {
     return "users/$id";
   }
