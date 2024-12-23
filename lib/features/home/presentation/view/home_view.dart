@@ -14,8 +14,8 @@ class HomeView extends StatelessWidget {
     try {
       final dio = Dio();
       final response = await dio
-          .get("http://192.168.43.59:8000/api/product/toprate?limit=10");
-
+          // .get("http://192.168.43.59:8000/api/product/toprate?limit=10");
+          .get("http://192.168.43.253:8000/api/product/toprate?limit=10");
       if (response.statusCode == 200) {
         print("API Response: ${response.data}");
         final data = response.data['products'] as List;

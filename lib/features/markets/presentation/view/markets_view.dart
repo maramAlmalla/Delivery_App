@@ -30,7 +30,8 @@ class _MarketsViewState extends State<MarketsView> {
     try {
       print('Fetching markets...');
       final dio = Dio();
-      final response = await dio.get('http://192.168.43.59:8000/api/markets');
+      // final response = await dio.get('http://192.168.43.59:8000/api/markets');
+      final response = await dio.get('http://192.168.43.253:8000/api/markets');
       print('Response received: ${response.data}');
       print(response.statusCode);
 

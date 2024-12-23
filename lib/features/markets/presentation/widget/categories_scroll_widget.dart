@@ -32,7 +32,8 @@ class _CategoriesScrollWidgetState extends State<CategoriesScrollWidget> {
       print('Fetching categories...');
       final dio = Dio();
       final response =
-          await dio.get('http://192.168.43.59:8000/api/categories');
+          // await dio.get('http://192.168.43.59:8000/api/categories');
+          await dio.get('http://192.168.43.253:8000/api/categories');
       print('Response received: ${response.data}');
       print(response.statusCode);
 

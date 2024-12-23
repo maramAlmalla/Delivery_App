@@ -9,7 +9,6 @@ import 'package:delivery_app_new/features/markets/presentation/view/markets_view
 import 'package:delivery_app_new/features/markets/presentation/view/search_view.dart';
 import 'package:delivery_app_new/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:delivery_app_new/features/order/order_status.dart';
-import 'package:delivery_app_new/features/profile/presentation/view/edit_profile_view.dart';
 import 'package:delivery_app_new/features/profile/presentation/view/profile_view.dart';
 import 'package:delivery_app_new/features/splash/presentation/view/splash_view.dart';
 import 'package:go_router/go_router.dart';

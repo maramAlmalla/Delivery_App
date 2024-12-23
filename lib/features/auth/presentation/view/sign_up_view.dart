@@ -71,7 +71,7 @@ class _SignUpViewState extends State<SignUpView> {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.message),
           ));
-          CustomNavigationReplacement(context, '/HomeView');
+          CustomNavigationReplacement(context, '/Main');
         } else if (state is SignUpFailure) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.errMessage),

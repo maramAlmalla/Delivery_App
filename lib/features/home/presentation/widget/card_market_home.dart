@@ -27,8 +27,8 @@ class _cardMarketHomeState extends State<cardMarketHome> {
     try {
       final dio = Dio();
       final response = await dio
-          .get("http://192.168.43.59:8000/api/market/toprate?limit=10");
-
+          // .get("http://192.168.43.59:8000/api/market/toprate?limit=10");
+          .get("http://192.168.43.253:8000/api/product/toprate?limit=10");
       if (response.statusCode == 200) {
         setState(() {
           stores = List<Map<String, dynamic>>.from(response.data['market']);

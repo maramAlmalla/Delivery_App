@@ -68,7 +68,7 @@ class _SignInViewState extends State<SignInView> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Sign In Successful')),
             );
-            CustomNavigationReplacement(context, '/HomeView');
+            CustomNavigationReplacement(context, '/Main');
           } else if (state is SignInFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.errMessage)),
@@ -200,7 +200,7 @@ class _SignInViewState extends State<SignInView> {
                 right: 16,
                 child: GestureDetector(
                   onTap: () {
-                    CustomNavigationReplacement(context, '/HomeView');
+                    CustomNavigationReplacement(context, '/Main');
                   },
                   child: Text('Skip',
                       style: CustomTextStyle.parkinsans300Style16

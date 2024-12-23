@@ -43,7 +43,7 @@ class HeaderSection extends StatelessWidget {
           right: 16,
           child: GestureDetector(
             onTap: () {
-              CustomNavigationReplacement(context, '/HomeView');
+              CustomNavigationReplacement(context, '/Main');
             },
             child: Text('Skip',
                 style: CustomTextStyle.parkinsans300Style16
