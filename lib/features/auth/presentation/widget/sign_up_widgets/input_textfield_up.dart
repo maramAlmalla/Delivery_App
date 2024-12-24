@@ -6,7 +6,6 @@ class InputFieldsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final cubit = context.read<UserCubit>();
     return const Column(
       children: [
         CustomTextField2(

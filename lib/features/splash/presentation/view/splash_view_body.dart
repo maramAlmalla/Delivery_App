@@ -53,7 +53,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
             decoration: const BoxDecoration(
               boxShadow: [],
               image: DecorationImage(
-                image: AssetImage(Assets.onBoarding1),
+                image: AssetImage(Assets.logo),
                 fit: BoxFit.cover,
               ),
             ),

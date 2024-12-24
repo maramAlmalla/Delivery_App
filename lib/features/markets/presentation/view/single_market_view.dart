@@ -196,8 +196,6 @@ class _SingleMarketViewState extends State<SingleMarketView> {
                                       marketData!['products'][index];
                                   return Card(
                                       color: AppColors.deepTeal,
-                                      // color:
-                                      //     const Color.fromARGB(255, 206, 202, 202),
                                       margin: const EdgeInsets.symmetric(
                                           vertical: 12, horizontal: 20),
                                       shape: RoundedRectangleBorder(
@@ -357,7 +355,6 @@ class _SingleMarketViewState extends State<SingleMarketView> {
                                                   ),
                                                 ),
                                               ])));
-                                  // Product Rating
                                 })
                               ],
                             )),

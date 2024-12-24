@@ -12,14 +12,14 @@ class HeaderWidget extends StatelessWidget {
         Center(
           child: Image.asset(
             'assets/image/delivery man logo.jpeg.png',
-            width: 150,
-            height: 150,
+            width: 250,
+            height: 250,
           ),
         ),
         Text(
           'Delivery Man',
           style: CustomTextStyle.parkinsans600Style28
-              .copyWith(color: AppColors.afwait, fontSize: 35),
+              .copyWith(color: AppColors.tealGreen, fontSize: 35),
         ),
       ],
     );

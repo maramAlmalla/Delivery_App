@@ -28,13 +28,13 @@ class HeaderSection extends StatelessWidget {
             children: [
               Text("Let's",
                   style: CustomTextStyle.parkinsans500Style24
-                      .copyWith(color: AppColors.afwait, fontSize: 25)),
+                      .copyWith(color: AppColors.tealGreen, fontSize: 25)),
               Text("Create Your",
                   style: CustomTextStyle.parkinsans500Style24
-                      .copyWith(color: AppColors.afwait, fontSize: 25)),
+                      .copyWith(color: AppColors.tealGreen, fontSize: 25)),
               Text("Account",
                   style: CustomTextStyle.parkinsans500Style24
-                      .copyWith(color: AppColors.afwait, fontSize: 25)),
+                      .copyWith(color: AppColors.tealGreen, fontSize: 25)),
             ],
           ),
         ),

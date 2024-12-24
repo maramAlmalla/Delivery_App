@@ -22,7 +22,7 @@ class ContainertoLockView extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 80, // تعديل مكان الحقل
+          top: 80,
           left: 40,
           right: 40,
           child: CustomTextField2(
@@ -38,7 +38,7 @@ class ContainertoLockView extends StatelessWidget {
           ),
         ),
         Positioned(
-            top: 180, // تعديل مكان الحقل
+            top: 180,
             left: 40,
             right: 40,
             child: CustomButton(
@@ -48,7 +48,6 @@ class ContainertoLockView extends StatelessWidget {
         Positioned(
           top: 280,
           left: 180,
-          // right: 100,
           child: GestureDetector(
             onTap: () {
               CustomNavigationReplacement(context, '/SignInView');

@@ -43,8 +43,7 @@ class _MarketsViewState extends State<MarketsView> {
             'id': item['id'] ?? 0,
             'title': item['title'] ?? 'No Title',
             'location': item['location'] ?? 'No Location',
-            'img': item['img'] ??
-                '', // إذا كانت الصورة فارغة، نعالجها في MarketCard
+            'img': item['img'] ?? '',
             'rating': (item['rating'] as num?)?.toDouble() ?? 0.0,
           };
         }).toList();

@@ -1,5 +1,5 @@
 abstract class Assets {
-  static const splashView = "";
+  static const logo = "assets/image/delivery man logo.jpeg.png";
 
   static const onBoarding1 = "assets/image/onBoarding1.png";
   static const onBoarding2 = "assets/image/onBoarding2.png";

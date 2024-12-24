@@ -5,8 +5,7 @@ import 'package:dio/dio.dart';
 final sl = GetIt.instance;
 
 void setupServiceLocator() {
-  // تسجيل Dio
   sl.registerLazySingleton<Dio>(() => Dio());
-  // تسجيل ApiService
+
   sl.registerLazySingleton<ApiService>(() => ApiService(sl<Dio>()));
 }

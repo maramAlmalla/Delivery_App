@@ -12,12 +12,12 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, // هنا يتم تنفيذ الدالة onTap عند الضغط
+      onTap: onTap,
       child: Container(
         width: 300,
         height: 45,
         decoration: BoxDecoration(
-          color: color ?? Colors.blue, // إضافة قيمة افتراضية للون
+          color: color ?? Colors.blue,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Center(

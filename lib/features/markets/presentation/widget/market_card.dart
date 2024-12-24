@@ -32,7 +32,6 @@ class MarketCard extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            // الصورة
             Container(
               width: 70,
               height: 70,

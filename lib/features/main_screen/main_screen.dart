@@ -22,14 +22,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0; // لمتابعة الصفحة الحالية
+  int _currentIndex = 0;
 
-  // قائمة الشاشات للتنقل بينها
   final List<Widget> _screens = [
-    HomeView(),
-    MarketsView(),
+    const HomeView(),
+    const MarketsView(),
     FavoriteView(),
-    ProfileView(),
+    const ProfileView(),
   ];
 
   @override
