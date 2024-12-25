@@ -7,14 +7,13 @@ abstract class ApiConsumer {
   });
   Future<dynamic> post(
     String path, {
-    // Object? headers,
     Object? data,
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,
     Map<String, dynamic>? headers,
   });
   Future<dynamic> patch(
-    String path, {
+    String pathap, {
     Object? data,
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,

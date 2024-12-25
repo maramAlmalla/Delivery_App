@@ -4,6 +4,7 @@ import 'package:delivery_app_new/core/utils/app_text_Style.dart';
 import 'package:delivery_app_new/features/markets/presentation/data/product_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_common/get_reset.dart';
 
 class SingleProductView extends StatefulWidget {
   final int productId;

@@ -9,13 +9,6 @@ class ApiInterceptor extends Interceptor {
       'Accept': 'application/json',
     });
 
-    String? token = CashHelper().getData(key: ApiKey.token);
-    if (token != null) {
-      options.headers[ApiKey.token] = 'FOODAPI $token';
-      // Print the token being sent
-      print("Request Headers: ${options.headers}");
-    }
-    //////
     options.headers[ApiKey.token] =
         CashHelper().getData(key: ApiKey.token) != null
             ? 'FOODAPI ${CashHelper().getData(key: ApiKey.token)}'

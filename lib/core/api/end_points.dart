@@ -1,5 +1,5 @@
 class EndPoint {
-  static String baseUrl = "http://192.168.43.253:8000/api/";
+  static String baseUrl = "http://192.168.1.4:8000/api/";
   static String signIn = "login";
   static String signUp = "register";
   static String logout = "logout";
@@ -13,6 +13,24 @@ class EndPoint {
 
   static String updateUserDataEndPoint(id) {
     return "users/update/$id";
+  }
+
+  static String getMarkets() {
+    return "markets";
+  }
+
+  static String topRatedProducts = "product/toprate";
+
+  static String getTopRatedProductsUrl({int limit = 10}) {
+    return "${baseUrl}${topRatedProducts}?limit=$limit";
+  }
+
+  static String getTopRatedMarkets({int limit = 5}) {
+    return "market/toprate?limit=$limit";
+  }
+
+  static String getCategories() {
+    return "categories";
   }
 }
 

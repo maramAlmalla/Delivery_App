@@ -1,3 +1,4 @@
+import 'package:delivery_app_new/core/api/end_points.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
 import 'package:delivery_app_new/core/utils/app_text_Style.dart';
 import 'package:delivery_app_new/features/markets/presentation/view/single_market_view.dart';
@@ -27,8 +28,8 @@ class _cardMarketHomeState extends State<cardMarketHome> {
     try {
       final dio = Dio();
       final response = await dio
-          // .get("http://192.168.43.59:8000/api/market/toprate?limit=10");
-          .get("http://192.168.43.253:8000/api/product/toprate?limit=10");
+          .get("${EndPoint.baseUrl}${EndPoint.getTopRatedMarkets(limit: 5)}");
+
       if (response.statusCode == 200) {
         setState(() {
           stores = List<Map<String, dynamic>>.from(response.data['market']);

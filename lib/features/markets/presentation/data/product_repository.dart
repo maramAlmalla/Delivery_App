@@ -1,4 +1,5 @@
 import 'package:delivery_app_new/core/api/api_conSumer.dart';
+import 'package:delivery_app_new/core/api/end_points.dart';
 
 class ProductRepository {
   final ApiConsumer apiConsumer;
@@ -8,10 +9,25 @@ class ProductRepository {
   Future<Map<String, dynamic>> fetchProductData(int productId) async {
     try {
       final response = await apiConsumer
-          // .get("http://192.168.43.59:8000/api/products/$productId");
-          .get("http://192.168.43.253:8000/api/product/toprate?limit=10");
-      return response['product'] as Map<String, dynamic>;
+          .get("${EndPoint.baseUrl}${EndPoint.getTopRatedProducts(limit: 10)}");
+
+      if (!response.containsKey('products')) {
+        throw Exception('Response does not contain "products" key.');
+      }
+
+      final products = response['products'] as List<dynamic>;
+      final product = products.firstWhere(
+        (product) => product['id'] == productId,
+        orElse: () => null,
+      );
+
+      if (product == null) {
+        throw Exception('Product with ID $productId not found.');
+      }
+
+      return product as Map<String, dynamic>;
     } catch (e) {
+      print("Error in fetchProductData: $e");
       throw Exception('Failed to fetch product data: $e');
     }
   }

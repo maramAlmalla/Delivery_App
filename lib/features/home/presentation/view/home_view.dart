@@ -1,3 +1,4 @@
+import 'package:delivery_app_new/core/api/end_points.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
 import 'package:delivery_app_new/core/utils/app_text_Style.dart';
 import 'package:delivery_app_new/features/home/presentation/widget/appbar_home_view.dart';
@@ -13,9 +14,9 @@ class HomeView extends StatelessWidget {
   Future<List<Map<String, dynamic>>> fetchProducts() async {
     try {
       final dio = Dio();
-      final response = await dio
-          // .get("http://192.168.43.59:8000/api/product/toprate?limit=10");
-          .get("http://192.168.43.253:8000/api/product/toprate?limit=10");
+      final url = EndPoint.getTopRatedProductsUrl(limit: 10);
+      final response = await dio.get(url);
+
       if (response.statusCode == 200) {
         print("API Response: ${response.data}");
         final data = response.data['products'] as List;

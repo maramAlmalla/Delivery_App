@@ -1,3 +1,4 @@
+import 'package:delivery_app_new/core/api/end_points.dart';
 import 'package:delivery_app_new/core/function/navigation.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
 import 'package:delivery_app_new/core/utils/app_text_Style.dart';
@@ -30,8 +31,8 @@ class _MarketsViewState extends State<MarketsView> {
     try {
       print('Fetching markets...');
       final dio = Dio();
-      // final response = await dio.get('http://192.168.43.59:8000/api/markets');
-      final response = await dio.get('http://192.168.43.253:8000/api/markets');
+      final response =
+          await dio.get("${EndPoint.baseUrl}${EndPoint.getMarkets()}");
       print('Response received: ${response.data}');
       print(response.statusCode);
 

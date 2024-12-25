@@ -1,3 +1,4 @@
+import 'package:delivery_app_new/core/api/end_points.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -32,8 +33,7 @@ class _CategoriesScrollWidgetState extends State<CategoriesScrollWidget> {
       print('Fetching categories...');
       final dio = Dio();
       final response =
-          // await dio.get('http://192.168.43.59:8000/api/categories');
-          await dio.get('http://192.168.43.253:8000/api/categories');
+          await dio.get("${EndPoint.baseUrl}${EndPoint.getCategories()}");
       print('Response received: ${response.data}');
       print(response.statusCode);
 
