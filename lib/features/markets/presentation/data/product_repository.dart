@@ -8,8 +8,8 @@ class ProductRepository {
 
   Future<Map<String, dynamic>> fetchProductData(int productId) async {
     try {
-      final response = await apiConsumer.get(
-          "${EndPoint.baseUrl}${EndPoint.getTopRatedProductsUrl(limit: 10)}");
+      final response = await apiConsumer
+          .get("${EndPoint.getTopRatedProductsUrl(limit: 10)}");
 
       if (!response.containsKey('products')) {
         throw Exception('Response does not contain "products" key.');

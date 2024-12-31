@@ -1,5 +1,5 @@
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/auth/presentation/view_model/cubits/cubit/user_cubit.dart';
 import 'package:delivery_app_new/features/profile/presentation/view/edit_profile_view.dart';
 import 'package:flutter/material.dart';

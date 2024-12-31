@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:delivery_app_new/core/api/dio_consumer.dart';
+import 'package:delivery_app_new/core/api/end_points.dart';
+import 'package:delivery_app_new/core/database/cache/cache_helper.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/markets/presentation/data/product_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_common/get_reset.dart';
 
 class SingleProductView extends StatefulWidget {
   final int productId;
@@ -21,6 +24,39 @@ class _SingleProductViewState extends State<SingleProductView> {
   bool isLoading = true;
   late ProductRepository productRepository;
   int quantity = 1;
+  bool isFavorite = false;
+
+  Future<void> toggleFavorite() async {
+    final userId = CacheHelper.sharedPreferences.getInt('userId');
+    if (userId == null) {
+      _showLoginDialog();
+      return;
+    }
+
+    try {
+      final response = await productRepository.apiConsumer.post(
+        "${EndPoint.baseUrl}favorites",
+        data: FormData.fromMap({
+          'userId': userId.toString(),
+          'productId': widget.productId.toString(),
+        }),
+      );
+
+      if (response is Map<String, dynamic>) {
+        final message = response['message'];
+        if (message != null) {
+          setState(() {
+            isFavorite = !isFavorite;
+          });
+          // _showSuccessDialog(message);
+        } else {
+          _showErrorDialog('Failed to update favorite status.');
+        }
+      }
+    } catch (e) {
+      _showErrorDialog('Error toggling favorite: $e');
+    }
+  }
 
   @override
   void initState() {
@@ -45,6 +81,159 @@ class _SingleProductViewState extends State<SingleProductView> {
     }
   }
 
+  Future<void> _addToCart() async {
+    final userId = CacheHelper.sharedPreferences.getInt('userId');
+    if (userId == null) {
+      _showLoginDialog();
+      return;
+    }
+
+    try {
+      final cartId = CacheHelper.sharedPreferences.getInt('cartId');
+      print("Current cartId from SharedPreferences: $cartId");
+
+      if (cartId != null) {
+        await _addProductToCart(cartId);
+      } else {
+        final newCartId = await _createCartForUser(userId);
+        if (newCartId != null) {
+          print("New cartId created: $newCartId");
+
+          await CacheHelper.sharedPreferences.setInt('cartId', newCartId);
+
+          final updatedCartId = CacheHelper.sharedPreferences.getInt('cartId');
+          print("Updated cartId in SharedPreferences: $updatedCartId");
+
+          await _addProductToCart(updatedCartId!);
+        } else {
+          _showErrorDialog('Failed to create a new cart.');
+        }
+      }
+    } catch (e) {
+      _showErrorDialog('Error while adding to cart: $e');
+    }
+  }
+
+  Future<int?> _createCartForUser(int userId) async {
+    try {
+      final response = await productRepository.apiConsumer.post(
+        EndPoint.carts,
+        data: jsonEncode({'userId': userId}),
+        options: _getRequestOptions(),
+      );
+
+      if (response is Map<String, dynamic>) {
+        final cart = response['cart'];
+        if (cart != null && cart['id'] != null) {
+          return cart['id'];
+        }
+      }
+      return null;
+    } catch (e) {
+      print('Error while creating cart: $e');
+      return null;
+    }
+  }
+
+  Future<void> _addProductToCart(int cartId) async {
+    try {
+      final response = await productRepository.apiConsumer.post(
+        EndPoint.cartItems,
+        data: jsonEncode({
+          'cartId': cartId,
+          'productId': widget.productId,
+          'quantity': quantity,
+        }),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response is Map<String, dynamic>) {
+        // final message = response['message'];
+        // if (message != null && message.toLowerCase().contains('success')) {
+        //   _showSuccessDialog('Product added to cart successfully.');
+        // } else {
+        //   _showErrorDialog('Failed to add product: $message');
+        // }
+      }
+    } catch (e) {
+      _showErrorDialog('Error adding product to cart: $e');
+    }
+  }
+
+  Options _getRequestOptions() {
+    return Options(
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization':
+            'Bearer ${CacheHelper.sharedPreferences.getString('token')}',
+      },
+    );
+  }
+
+  void _showLoginDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          "You are not logged in",
+          style: CustomTextStyle.parkinsans500Style24
+              .copyWith(color: AppColors.goldenOrange),
+        ),
+        content: Text(
+          "Please log in to add products to your cart.",
+          style: CustomTextStyle.parkinsans300Style16
+              .copyWith(fontWeight: FontWeight.w600),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              "OK",
+              style: CustomTextStyle.parkinsans300Style16
+                  .copyWith(color: AppColors.goldenOrange),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Error"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showSuccessDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Success"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +253,9 @@ class _SingleProductViewState extends State<SingleProductView> {
                           const SizedBox(height: 32),
                           _buildProductImages(),
                           const SizedBox(height: 10),
-                          _buildProductTitleAndPrice(),
+                          _buildProductTitleAndFavoriteButton(),
+                          const SizedBox(height: 2),
+                          _buildPrice(),
                           const SizedBox(height: 14),
                           _buildRating(),
                           const SizedBox(height: 10),
@@ -77,6 +268,47 @@ class _SingleProductViewState extends State<SingleProductView> {
                     _buildBottomBar(),
                   ],
                 ),
+    );
+  }
+
+  Widget _buildProductTitleAndFavoriteButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              productData?['title'] ?? 'Default Product',
+              style: CustomTextStyle.parkinsans300Style16.copyWith(
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? Colors.red : Colors.black,
+            ),
+            onPressed: toggleFavorite,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPrice() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Text(
+        '\$${productData?['price'] ?? '0.00'}',
+        style: CustomTextStyle.parkinsans300Style16.copyWith(
+          fontSize: 24,
+          color: AppColors.goldenOrange,
+        ),
+      ),
     );
   }
 
@@ -104,7 +336,9 @@ class _SingleProductViewState extends State<SingleProductView> {
           Text(
             'Product Details',
             style: CustomTextStyle.parkinsans300Style16.copyWith(
-                fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),
+                fontSize: 22,
+                color: AppColors.tealGreen,
+                fontWeight: FontWeight.bold),
           ),
           IconButton(
             icon: const Icon(Icons.add_shopping_cart, color: Colors.white),
@@ -120,7 +354,6 @@ class _SingleProductViewState extends State<SingleProductView> {
     return images.isNotEmpty
         ? SizedBox(
             height: 200,
-            // width: double.infinity,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: images.length,
@@ -277,7 +510,9 @@ class _SingleProductViewState extends State<SingleProductView> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               ),
-              onPressed: () {},
+              onPressed: () {
+                _addToCart();
+              },
               child: Text(
                 'Add to cart',
                 style: CustomTextStyle.parkinsans300Style16.copyWith(

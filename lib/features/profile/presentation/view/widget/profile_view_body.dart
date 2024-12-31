@@ -1,5 +1,5 @@
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/auth/presentation/view_model/cubits/cubit/user_cubit.dart';
 import 'package:delivery_app_new/features/profile/presentation/view/widget/gesturdetec_profile_view_body.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,8 @@ class ProfileViewBody extends StatelessWidget {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is LogoutSuccess) {
-          Navigator.pushReplacementNamed(context, '/HomeView');
+          Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, '/Main');
         } else if (state is LogoutFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Error: ${state.errMessage}")),
@@ -79,15 +80,14 @@ class ProfileViewBody extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text(
-                "Cancel",
-                style: CustomTextStyle.parkinsans400Style16,
-              ),
+              child: const Text("Cancel",
+                  style: CustomTextStyle.parkinsans400Style16),
             ),
             ElevatedButton(
               onPressed: () {
                 context.read<UserCubit>().logout();
-                Navigator.pushReplacementNamed(context, '/HomeView');
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/Main');
               },
               child: Text(
                 "Logout",

@@ -1,8 +1,8 @@
 import 'package:delivery_app_new/core/function/navigation.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
 import 'package:delivery_app_new/core/utils/app_string.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
-import 'package:delivery_app_new/core/widget/Custom_button.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
+import 'package:delivery_app_new/core/widget/custom_button.dart';
 import 'package:delivery_app_new/features/on_boarding/data/models/on_boarding_models.dart';
 import 'package:delivery_app_new/features/on_boarding/presentation/views/functions/on_boarding.dart';
 import 'package:flutter/material.dart';

@@ -4,17 +4,18 @@ import 'package:delivery_app_new/features/auth/presentation/view/sign_up_view.da
 import 'package:delivery_app_new/features/favorite/presentation/view/fav_view.dart';
 import 'package:delivery_app_new/features/home/presentation/view/home_view.dart';
 import 'package:delivery_app_new/features/main_screen/main_screen.dart';
-import 'package:delivery_app_new/features/markets/presentation/view/cart_view.dart';
+import 'package:delivery_app_new/features/cart/view/cart_view.dart';
 import 'package:delivery_app_new/features/markets/presentation/view/markets_view.dart';
-import 'package:delivery_app_new/features/markets/presentation/view/search_view.dart';
+import 'package:delivery_app_new/features/search/view/search_markets_view.dart';
 import 'package:delivery_app_new/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:delivery_app_new/features/order/order_status.dart';
 import 'package:delivery_app_new/features/profile/presentation/view/profile_view.dart';
+import 'package:delivery_app_new/features/search/view/search_products_view.dart';
 import 'package:delivery_app_new/features/splash/presentation/view/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
-    // initialLocation: "/OrderStatus",
+    // initialLocation: "/SignUpView",
     routes: [
       GoRoute(
         path: "/",
@@ -38,15 +39,19 @@ final GoRouter router = GoRouter(
       ),
       GoRoute(
         path: "/FavoriteView",
-        builder: (context, state) => FavoriteView(),
+        builder: (context, state) => const FavoriteView(),
       ),
       GoRoute(
         path: "/MarketsView",
         builder: (context, state) => const MarketsView(),
       ),
       GoRoute(
-        path: "/SearchView",
-        builder: (context, state) => SearchView(),
+        path: "/SearchMarketView",
+        builder: (context, state) => SearchMarketView(),
+      ),
+      GoRoute(
+        path: "/SearchHomeView",
+        builder: (context, state) => const SearchProductView(),
       ),
       GoRoute(
         path: "/ForgetPasswordView",
@@ -66,6 +71,6 @@ final GoRouter router = GoRouter(
       ),
       GoRoute(
         path: "/CartView",
-        builder: (context, state) => CartView(),
+        builder: (context, state) => const CartView(),
       ),
     ]);

@@ -1,4 +1,4 @@
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField2 extends StatelessWidget {

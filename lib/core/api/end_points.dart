@@ -1,11 +1,13 @@
 class EndPoint {
-  static String baseUrl = "http://192.168.1.4:8000/api/";
+  static String baseUrl = "http://192.168.1.8:8000/api/";
   static String signIn = "login";
   static String signUp = "register";
   static String logout = "logout";
   static String categories = "categories";
   static String forgotPassword = "forgot-password";
   static String resetPassword = "reset-password";
+
+  static String createCart = "${baseUrl}carts";
 
   static String getUserDataEndPoint(id) {
     return "users/$id";
@@ -22,7 +24,7 @@ class EndPoint {
   static String topRatedProducts = "product/toprate";
 
   static String getTopRatedProductsUrl({int limit = 10}) {
-    return "${baseUrl}${topRatedProducts}?limit=$limit";
+    return "$baseUrl$topRatedProducts?limit=$limit";
   }
 
   static String getTopRatedMarkets({int limit = 5}) {
@@ -31,6 +33,21 @@ class EndPoint {
 
   static String getCategories() {
     return "categories";
+  }
+
+  static String carts = "${baseUrl}carts";
+  static String cartItems = "${baseUrl}cart-items";
+
+  static String getCartItemById(int id) {
+    return "$cartItems/$id";
+  }
+
+  static String getProductDetails(int productId) {
+    return "${baseUrl}products/$productId";
+  }
+
+  static String getCartById(int cartId) {
+    return "${baseUrl}carts/$cartId";
   }
 }
 

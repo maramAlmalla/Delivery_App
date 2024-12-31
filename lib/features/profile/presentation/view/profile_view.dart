@@ -1,6 +1,7 @@
+import 'package:delivery_app_new/core/database/cache/cache_helper.dart';
 import 'package:delivery_app_new/core/function/navigation.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/auth/presentation/view_model/cubits/cubit/user_cubit.dart';
 import 'package:delivery_app_new/features/profile/presentation/view/widget/app_bar_container_edit_profile.dart';
 import 'package:delivery_app_new/features/profile/presentation/view/widget/id_profile_user.dart';
@@ -10,9 +11,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final token = CacheHelper().getDataString(key: 'token');
+    if (token == null || token.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return _buildErrorDialog(context);
+          },
+        );
+      });
+      return const SizedBox.shrink();
+    }
     return Scaffold(
       body: BlocBuilder<UserCubit, UserState>(
         builder: (context, state) {
@@ -20,7 +33,7 @@ class ProfileView extends StatelessWidget {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is GetUserSuccess && state.userModel != null) {
+          } else if (state is GetUserSuccess) {
             final user = state.userModel;
             return SingleChildScrollView(
               child: Column(
@@ -29,7 +42,7 @@ class ProfileView extends StatelessWidget {
                   AppBarContainerEditProfile(
                     title: 'Profile User',
                     onPressed: () {
-                      CustomNavigationReplacement(context, '/HomeView');
+                      CustomNavigationReplacement(context, '/Main');
                     },
                   ),
                   IdProfileUser(
@@ -83,11 +96,12 @@ class ProfileView extends StatelessWidget {
         children: [
           Text('Account Error',
               style: CustomTextStyle.parkinsans500Style24
-                  .copyWith(color: AppColors.darkTealBlue)),
+                  .copyWith(color: AppColors.goldenOrange)),
           IconButton(
             icon: Icon(Icons.close, color: AppColors.darkTealBlue),
             onPressed: () {
-              CustomNavigationReplacement(context, '/HomeView');
+              // CustomNavigationReplacement(context, '/Main');
+              Navigator.pop(context);
             },
           ),
         ],

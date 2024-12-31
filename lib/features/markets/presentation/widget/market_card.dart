@@ -1,5 +1,5 @@
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/markets/presentation/view/single_market_view.dart';
 import 'package:delivery_app_new/features/markets/presentation/widget/custom_icon_botton.dart';
 import 'package:flutter/material.dart';

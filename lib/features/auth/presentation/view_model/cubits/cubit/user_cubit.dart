@@ -1,5 +1,5 @@
 import 'dart:io';
-
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:delivery_app_new/core/api/api_conSumer.dart';
 import 'package:delivery_app_new/core/api/end_points.dart';
@@ -78,13 +78,16 @@ class UserCubit extends Cubit<UserState> {
       final token = signUpUser!.token!;
       final userId = response['user']['id'];
 
-      await CashHelper().saveData(key: 'token', value: token);
-      await CashHelper().saveData(key: 'userId', value: userId);
+      await CacheHelper().saveData(key: 'token', value: token);
+      await CacheHelper().saveData(key: 'userId', value: userId);
 
       print("Token saved: $token");
 
+      //
+      await _createCartForUser(userId);
+
       emit(SignUpSuccess(message: signUpUser!.message));
-      final storedToken = CashHelper().getDataString(key: 'token');
+      final storedToken = CacheHelper().getDataString(key: 'token');
       print("Stored Token: $storedToken");
     } on ServerException catch (e) {
       emit(SignUpFailure(errMessage: e.errModel.errorMessage));
@@ -92,6 +95,38 @@ class UserCubit extends Cubit<UserState> {
       print("Error: $e");
       emit(SignUpFailure(
           errMessage: "Unexpected error occurred. Please try again."));
+    }
+  }
+
+  //___________________________________
+  Future<void> _createCartForUser(int userId) async {
+    try {
+      final url = EndPoint.createCart;
+      final response = await api.post(
+        url,
+        data: {"userId": userId},
+      );
+
+      if (response.containsKey('cart')) {
+        print("Cart created successfully for userId: $userId");
+
+        final cart = response['cart'];
+        final cartId = cart['id'];
+
+        if (cartId != null) {
+          await CacheHelper.sharedPreferences.setInt('cartId', cartId);
+
+          print("Cart ID saved successfully.");
+        } else {
+          throw Exception("Cart ID is missing in the response.");
+        }
+      } else {
+        print("Failed to create cart for userId: $userId");
+        throw Exception("Failed to create cart");
+      }
+    } catch (e) {
+      print("Error creating cart: $e");
+      throw Exception("Error creating cart for userId: $userId");
     }
   }
 
@@ -115,8 +150,8 @@ class UserCubit extends Cubit<UserState> {
       final token = user!.token;
       final userId = response['userId'];
 
-      await CashHelper().saveData(key: 'token', value: token);
-      await CashHelper().saveData(key: 'userId', value: userId);
+      await CacheHelper().saveData(key: 'token', value: token);
+      await CacheHelper().saveData(key: 'userId', value: userId);
 
       emit(SignInSuccess());
     } on DioException catch (e) {
@@ -131,7 +166,7 @@ class UserCubit extends Cubit<UserState> {
     try {
       emit(GetUserLoading());
 
-      final userId = CashHelper().getData(key: 'userId');
+      final userId = CacheHelper().getData(key: 'userId');
       if (userId == null) {
         emit(GetUserFailure(errMessage: "User ID not found"));
         return;
@@ -160,7 +195,7 @@ class UserCubit extends Cubit<UserState> {
     try {
       emit(UpdateUserLoading());
 
-      final userId = CashHelper().getData(key: 'userId');
+      final userId = CacheHelper().getData(key: 'userId');
       if (userId == null) {
         emit(UpdateUserFailure(errMessage: "User ID not found"));
         return;
@@ -207,7 +242,7 @@ class UserCubit extends Cubit<UserState> {
     try {
       emit(LogoutLoading());
 
-      final token = CashHelper().getDataString(key: 'token');
+      final token = CacheHelper().getDataString(key: 'token');
       if (token == null || token.isEmpty) {
         emit(LogoutFailure(errMessage: "No token found."));
         return;
@@ -218,7 +253,7 @@ class UserCubit extends Cubit<UserState> {
         headers: {'Authorization': 'Bearer $token'},
       );
 
-      await CashHelper().clearData();
+      await CacheHelper().clearData();
       emit(LogoutSuccess());
     } catch (e) {
       emit(LogoutFailure(errMessage: "Failed to log out: $e"));

@@ -1,6 +1,6 @@
 import 'package:delivery_app_new/core/api/dio_consumer.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/markets/presentation/data/market_repository.dart';
 import 'package:delivery_app_new/features/markets/presentation/view/single_product_view.dart';
 import 'package:delivery_app_new/features/markets/presentation/widget/custom_icon_botton.dart';
@@ -93,7 +93,6 @@ class _SingleMarketViewState extends State<SingleMarketView> {
                             ],
                           ),
                         ),
-                        // Store Image
                         ClipRRect(
                           borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(30),
@@ -129,7 +128,6 @@ class _SingleMarketViewState extends State<SingleMarketView> {
                                           fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(height: 5),
-                                // Location
                                 Text(
                                   marketData?['location'] ??
                                       'No location available',
@@ -139,10 +137,7 @@ class _SingleMarketViewState extends State<SingleMarketView> {
                                     color: AppColors.goldenOrange,
                                   ),
                                 ),
-
                                 const SizedBox(height: 8),
-
-                                // Rating and Reviews
                                 Row(
                                   children: [
                                     const Icon(
@@ -179,14 +174,12 @@ class _SingleMarketViewState extends State<SingleMarketView> {
                                       const Color.fromARGB(255, 205, 203, 203),
                                   height: 1,
                                 ),
-                                // Products Section
                                 Text(
                                   'Products',
                                   style: CustomTextStyle.parkinsans500Style24
                                       .copyWith(fontSize: 23),
                                 ),
                                 const SizedBox(height: 8),
-
                                 ...List.generate(
                                     (marketData?['products']
                                                 as List<dynamic>? ??
@@ -208,7 +201,6 @@ class _SingleMarketViewState extends State<SingleMarketView> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                // Product Image
                                                 ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(15),
@@ -229,7 +221,6 @@ class _SingleMarketViewState extends State<SingleMarketView> {
                                                   ),
                                                 ),
                                                 const SizedBox(width: 16),
-                                                // Product Details
                                                 Expanded(
                                                   child: Column(
                                                     crossAxisAlignment:

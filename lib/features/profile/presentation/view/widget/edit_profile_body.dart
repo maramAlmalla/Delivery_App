@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/widget/Custom_button.dart';
+import 'package:delivery_app_new/core/widget/custom_button.dart';
 import 'package:delivery_app_new/features/auth/presentation/view_model/cubits/cubit/user_cubit.dart';
 import 'package:delivery_app_new/features/profile/presentation/view/widget/field_edit_prfile_body.dart';
 import 'package:delivery_app_new/features/profile/presentation/view/widget/text_edit_profile_app_textfield.dart';

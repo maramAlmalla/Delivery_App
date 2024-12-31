@@ -1,6 +1,7 @@
 import 'package:delivery_app_new/core/utils/app_assets.dart';
+import 'package:delivery_app_new/core/utils/app_colors.dart';
 import 'package:delivery_app_new/core/utils/app_string.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -19,7 +20,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void initState() {
     super.initState();
     animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 2000));
+        vsync: this, duration: const Duration(milliseconds: 3000));
     fadingAnimation =
         Tween<double>(begin: .2, end: 1).animate(animationController!)
           ..addListener(() {
@@ -64,13 +65,14 @@ class _SplashViewBodyState extends State<SplashViewBody>
           opacity: fadingAnimation!,
           child: Column(
             children: [
-              const Text(
+              Text(
                 AppString.appName,
                 style: CustomTextStyle.parkinsans600Style28,
               ),
               Text(
                 'DELIVERY MAN',
-                style: CustomTextStyle.parkinsans300Style16,
+                style: CustomTextStyle.parkinsans300Style16
+                    .copyWith(color: AppColors.grey),
                 textAlign: TextAlign.center,
               ),
             ],

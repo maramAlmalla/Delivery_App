@@ -10,8 +10,8 @@ class ApiInterceptor extends Interceptor {
     });
 
     options.headers[ApiKey.token] =
-        CashHelper().getData(key: ApiKey.token) != null
-            ? 'FOODAPI ${CashHelper().getData(key: ApiKey.token)}'
+        CacheHelper().getData(key: ApiKey.token) != null
+            ? 'FOODAPI ${CacheHelper().getData(key: ApiKey.token)}'
             : null;
 
     super.onRequest(options, handler);

@@ -1,6 +1,6 @@
 import 'package:delivery_app_new/core/api/end_points.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/markets/presentation/view/single_market_view.dart';
 import 'package:delivery_app_new/features/markets/presentation/widget/custom_icon_botton.dart';
 import 'package:dio/dio.dart';
@@ -11,9 +11,11 @@ class cardMarketHome extends StatefulWidget {
   const cardMarketHome({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _cardMarketHomeState createState() => _cardMarketHomeState();
 }
 
+// ignore: camel_case_types
 class _cardMarketHomeState extends State<cardMarketHome> {
   List<Map<String, dynamic>> stores = [];
   bool isLoading = true;

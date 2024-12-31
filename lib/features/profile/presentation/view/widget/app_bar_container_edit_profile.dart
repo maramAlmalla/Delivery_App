@@ -1,5 +1,5 @@
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class AppBarContainerEditProfile extends StatelessWidget {
@@ -30,11 +30,11 @@ class AppBarContainerEditProfile extends StatelessWidget {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 24, left: 70),
+        padding: const EdgeInsets.only(top: 30, left: 75),
         child: Text(
           title,
           style: CustomTextStyle.parkinsans500Style24
-              .copyWith(color: AppColors.afwait, fontSize: 30),
+              .copyWith(color: AppColors.tealGreen, fontSize: 30),
         ),
       )
     ]);

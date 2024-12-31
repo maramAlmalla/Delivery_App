@@ -1,8 +1,8 @@
 import 'package:delivery_app_new/core/function/navigation.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
-import 'package:delivery_app_new/core/widget/Custom_button.dart';
-import 'package:delivery_app_new/core/widget/cusstom_text_field.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
+import 'package:delivery_app_new/core/widget/custom_button.dart';
+import 'package:delivery_app_new/core/widget/custom_text_field.dart';
 import 'package:delivery_app_new/features/auth/presentation/view_model/cubits/cubit/user_cubit.dart';
 import 'package:delivery_app_new/features/auth/presentation/widget/header_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +12,7 @@ class SignInView extends StatefulWidget {
   const SignInView({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SignInViewState createState() => _SignInViewState();
 }
 
@@ -39,7 +40,7 @@ class _SignInViewState extends State<SignInView> {
         final state = context.read<UserCubit>().state;
         if (state is SignInSuccess) {
           context.read<UserCubit>().getUserProfile();
-          Navigator.pushReplacementNamed(context, '/HomeView');
+          Navigator.pushReplacementNamed(context, '/Main');
         } else if (state is SignInFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.errMessage)),

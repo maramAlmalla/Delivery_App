@@ -1,5 +1,5 @@
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/markets/presentation/view/single_product_view.dart';
 import 'package:delivery_app_new/features/markets/presentation/widget/custom_icon_botton.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class PrudoctCardHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color.fromARGB(255, 167, 162, 162),
+      color: const Color.fromARGB(255, 177, 170, 170),
       margin: const EdgeInsets.all(12),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -47,10 +47,14 @@ class PrudoctCardHome extends StatelessWidget {
                 color: AppColors.darkTealBlue,
                 borderRadius: BorderRadius.circular(15),
               ),
+              child: Icon(
+                Icons.image_not_supported,
+                color: AppColors.afwait,
+              ),
             ),
             const SizedBox(width: 10),
             Padding(
-              padding: EdgeInsets.all(9),
+              padding: const EdgeInsets.all(9),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -73,6 +77,7 @@ class PrudoctCardHome extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
+                  const SizedBox(height: 3),
                   Text(
                     'Discount: $discount%',
                     style: CustomTextStyle.parkinsans400Style12.copyWith(

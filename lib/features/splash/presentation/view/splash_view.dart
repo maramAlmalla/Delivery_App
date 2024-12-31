@@ -1,6 +1,7 @@
 import 'package:delivery_app_new/core/database/cache/cache_helper.dart';
 import 'package:delivery_app_new/core/function/navigation.dart';
 import 'package:delivery_app_new/core/service/servise_locator.dart';
+import 'package:delivery_app_new/core/utils/app_colors.dart';
 import 'package:delivery_app_new/features/splash/presentation/view/splash_view_body.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     bool isOnBoardingVisited =
-        getIt<CashHelper>().getData(key: "isOnBoardingVisited") ?? false;
+        getIt<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false;
     if (isOnBoardingVisited == true) {
       delayedNavigate(context, "/SignUpView");
     } else {
@@ -26,8 +27,9 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SplashViewBody(),
+    return Scaffold(
+      backgroundColor: AppColors.darkTealBlue,
+      body: const SplashViewBody(),
     );
   }
 }

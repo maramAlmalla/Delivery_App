@@ -1,6 +1,6 @@
 import 'package:delivery_app_new/core/api/end_points.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/home/presentation/widget/appbar_home_view.dart';
 import 'package:delivery_app_new/features/home/presentation/widget/card_market_home.dart';
 import 'package:delivery_app_new/features/home/presentation/widget/product_card_home.dart';
@@ -57,9 +57,10 @@ class HomeView extends StatelessWidget {
               showOuterContainer: false,
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 100),
+              padding: const EdgeInsets.only(right: 200),
               child: Text(
                 'Recommended for you:',
+                textAlign: TextAlign.left,
                 style: CustomTextStyle.parkinsans400Style16
                     .copyWith(fontWeight: FontWeight.bold, fontSize: 19),
               ),
@@ -103,7 +104,7 @@ class HomeView extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 240),
+              padding: const EdgeInsets.only(right: 320),
               child: Text(
                 'Activity :',
                 style: CustomTextStyle.parkinsans400Style16

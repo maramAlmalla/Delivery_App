@@ -1,7 +1,7 @@
 import 'package:delivery_app_new/core/api/end_points.dart';
 import 'package:delivery_app_new/core/function/navigation.dart';
 import 'package:delivery_app_new/core/utils/app_colors.dart';
-import 'package:delivery_app_new/core/utils/app_text_Style.dart';
+import 'package:delivery_app_new/core/utils/app_text_style.dart';
 import 'package:delivery_app_new/features/markets/presentation/widget/categories_scroll_widget.dart';
 import 'package:delivery_app_new/features/markets/presentation/widget/custom_icon_botton.dart';
 import 'package:delivery_app_new/features/markets/presentation/widget/market_card.dart';
@@ -26,7 +26,6 @@ class _MarketsViewState extends State<MarketsView> {
     fetchMarkets();
   }
 
-  @override
   Future<void> fetchMarkets() async {
     try {
       print('Fetching markets...');
@@ -74,23 +73,13 @@ class _MarketsViewState extends State<MarketsView> {
             ),
           ),
           Positioned(
-            left: 2,
-            top: 50,
-            child: CustomIconBotton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icons: const Icon(Icons.arrow_back, size: 24),
-            ),
-          ),
-          Positioned(
             top: 50,
             right: 20,
             child: Row(
               children: [
                 CustomIconBotton(
                   onPressed: () {
-                    CustomNavigationReplacement(context, "/SearchView");
+                    CustomNavigationReplacement(context, "/SearchMarketView");
                   },
                   icons: const Icon(Icons.search),
                 ),
@@ -105,7 +94,8 @@ class _MarketsViewState extends State<MarketsView> {
           ),
           Positioned(
             top: 100,
-            left: 130,
+            left: 160,
+            right: 100,
             child: Text(
               'Markets',
               style: CustomTextStyle.parkinsans400Style16.copyWith(
@@ -129,7 +119,7 @@ class _MarketsViewState extends State<MarketsView> {
             alignment: Alignment.bottomLeft,
             child: isLoading
                 ? const Center(child: CircularProgressIndicator())
-                : Container(
+                : SizedBox(
                     height: MediaQuery.of(context).size.height - 300,
                     child: ListView.builder(
                       itemCount: markets.length,

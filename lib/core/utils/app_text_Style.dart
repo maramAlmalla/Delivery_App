@@ -32,11 +32,11 @@ abstract class CustomTextStyle {
     fontWeight: FontWeight.w400,
     color: Colors.black,
   );
-  static const parkinsans600Style28 = TextStyle(
+  static var parkinsans600Style28 = TextStyle(
     fontFamily: 'Parkinsans',
     fontSize: 53,
     fontWeight: FontWeight.w700,
-    color: Color.fromARGB(255, 50, 58, 58),
+    color: AppColors.afwait,
   );
   static final parkinsans400Style12 = TextStyle(
     fontFamily: 'Parkinsans',

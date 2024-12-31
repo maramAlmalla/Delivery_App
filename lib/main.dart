@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocator();
-  await getIt<CashHelper>().init();
+  await getIt<CacheHelper>().init();
   return runApp(
     BlocProvider(
       create: (context) => UserCubit(DioConsumer(dio: Dio())),
